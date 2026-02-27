@@ -9,7 +9,10 @@ class UserFrom(Form):
         validators.DataRequired(message='El campo es requerido'),
         validators.Length(min=4,max=20,message='Ingrese nombre entre 4 y 20')
     ])
-    apaterno = StringField('A. Paterno',[
+    apellidos = StringField('Apellidos',[
+        validators.DataRequired(message='El campo es requerido')
+    ])
+    telefono = StringField('Telefono',[
         validators.DataRequired(message='El campo es requerido')
     ])
     email = EmailField('Correo',[
