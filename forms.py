@@ -19,3 +19,20 @@ class UserFrom(Form):
         validators.DataRequired(message='El campo es requerido'),
         validators.Email(message='Ingrese un correo válido')
     ])
+
+class MaestroFrom(Form):
+    matricula = IntegerField('maestro')
+    nombre = StringField('Nombre',[
+        validators.DataRequired(message='El campo es requerido'),
+        validators.Length(min=4,max=20,message='Ingrese nombre entre 4 y 20')
+    ])
+    apellidos = StringField('Apellidos',[
+        validators.DataRequired(message='El campo es requerido')
+    ])
+    especialidad = StringField('Especialidad',[
+        validators.DataRequired(message='El campo es requerido')
+    ])
+    email = EmailField('Correo',[
+        validators.DataRequired(message='El campo es requerido'),
+        validators.Email(message='Ingrese un correo válido')
+    ])
