@@ -1,11 +1,39 @@
 {% macro camposNuevos(field) %}
 <td>{{ field.label }}</td>
 <dd>{{ field(**kwargs) | safe }}</dd>
+{% if field.errors %}
+<ul>
+    {% for error in field.errors %}
+    <li style="color: red;">{{error}}</li>
+    {% endfor%}
+</ul>
+{% endif %}
+{% endmacro %}
+
+{% macro render_select(field, opciones) %}
+<div class="mb-4">
+    <label>
+        {{ field.label.text }}
+    </label>
+
+    <select id="maestro_id" name="maestro_id"
+        class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body">
+        <option value="">Seleccione uno</option>
+        {% for opc in opciones %}
+        {% if opc.matricula == field.data %}
+        <option value="{{opc.matricula}}" selected>{{opc.nombre}} {{opc.apellidos}}</option>
+        {% else %}
+        <option value="{{opc.matricula}}">{{opc.nombre}} {{opc.apellidos}}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+
     {% if field.errors %}
-    <ul>
+    <div class="mt-1 text-sm text-red-600">
         {% for error in field.errors %}
-        <li style="color: red;">{{error}}</li>
-        {% endfor%}
-    </ul>
+        <div>⚠ {{ error }}</div>
+        {% endfor %}
+    </div>
     {% endif %}
+</div>
 {% endmacro %}
